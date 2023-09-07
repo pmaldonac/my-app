@@ -1,0 +1,43 @@
+.buttonRegistrarPatente{
+    
+    background-color: rgba(10, 23, 138, 0.74) !important;
+    color: rgb(255, 255, 255) !important;
+    
+}
+.buttonRegistrarPatente:hover {
+    background-color: rgba(10, 23, 138, 0.338) !important;
+    color: rgb(255, 255, 255) !important;
+  }
+
+.buttonRegistrarPatenteDesconocida{
+    
+    background-color: rgba(255, 0, 0) !important;
+    color: rgb(255, 255, 255) !important;
+    
+}
+.buttonRegistrarPatenteDesconocida:hover {
+    background-color: rgba(255, 0, 0, 0.60) !important;
+    color: rgb(255, 255, 255) !important;
+  }
+
+.buttonIntrusoCamara{
+  background-color: rgba(10, 23, 138, 0.74) !important;
+  color: rgb(255, 255, 255) !important;
+
+}
+
+.buttonIntrusoCamara:hover {
+  background-color: rgba(10, 23, 138, 0.338) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.buttonIntrusoObservacion{
+  background-color: rgba(255, 188, 17, 0.88) !important;
+  color: rgb(255, 255, 255) !important;
+
+}
+
+.buttonIntrusoObservacion:hover {
+  background-color: rgba(255, 188, 17, 0.38)  !important;
+  color: rgb(255, 255, 255) !important;
+}

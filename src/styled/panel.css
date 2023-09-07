@@ -1,0 +1,22 @@
+.buttonEvento{
+    background-color: rgba(255, 188, 17, 0.82) !important;
+    color: rgb(255, 255, 255) !important;
+
+    
+}
+.buttonEvento:hover {
+    background-color: rgba(255, 188, 17, 0.50) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+
+.buttonVideo{
+    background-color: rgba(82, 172, 70, 0.76) !important;
+    color: rgb(255, 255, 255) !important;
+
+    
+}
+.buttonVideo:hover {
+    background-color: rgba(82, 172, 70, 0.40) !important;
+    color: rgb(255, 255, 255) !important;
+  }
