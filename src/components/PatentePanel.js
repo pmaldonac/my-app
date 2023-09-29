@@ -22,8 +22,8 @@ const PatentePanel  = (props)=>{
                 </Grid>
                 <Grid>
                     <Paper style={CampoPaper}>
-                        <Typography><strong>Último Acceso</strong></Typography>
-                        <Typography><strong>FTFD-17</strong></Typography>
+                        <Typography fontSize= {18}><strong>Último Acceso</strong></Typography>
+                        <Typography fontSize= {18}><strong>FTFD-17</strong></Typography>
                     </Paper>
                 </Grid>
                 <Grid>

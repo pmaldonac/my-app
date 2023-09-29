@@ -1,27 +1,38 @@
 import HeaderPanel from "../../components/headerPanel"
-import { Grid, Paper, Modal, Typography } from "@mui/material";
+import { Grid, Modal } from "@mui/material";
 import VideoPanel from "../../components/VideoPanel";
 import PatentePanel from "../../components/PatentePanel";
 import EventosPanel from "../../components/EventosPanel";
 import React, {useState} from "react";
 import PatenteNotification from "../../components/PatenteNotificacion";
 import IntrusosNotification from "../../components/IntrusoNotificacion";
-import IntrusosCamara from "../../components/CamaraIntrusoAlerta";
-import IntrusosObservacionNotification from "../../components/ObservacionIntrusoAlerta"
-import RegistroPatenteNotification from "../../components/RegistroPatenteNotificacion"
 import NuevoEvento from "../../components/NuevoEvento";
+import alert from "../../Assets/alert.mp3"
 
 const Panel = (props)=>{
-    const [data, setData]= useState("patentes")
+    const [data, setData]= useState("intrusos")
     const [notification,setNotification] = useState(true)
+    const [sonido, setSonido] = useState(false)
+       
+    const handleClose = () => {
+        setNotification(false)
+    }
 
+    const play = () =>{
+        new Audio(alert).play()
+        setSonido(true)
+    }
 
+ 
     const showNotification = () =>{
+        if(!sonido && notification){
+            play()
+        }
         switch(data){
             case "patentes":
-                return <RegistroPatenteNotification></RegistroPatenteNotification>
+                return <PatenteNotification onClose={handleClose}></PatenteNotification>
             case "intrusos":
-                return <IntrusosNotification></IntrusosNotification>
+                return <IntrusosNotification isOpen={notification} onClose={handleClose}></IntrusosNotification>
             case "eventos":
                 return <NuevoEvento></NuevoEvento>
             default: 
@@ -30,9 +41,7 @@ const Panel = (props)=>{
         
 
     }
-    const handleClose = () => {
-        setNotification(false)
-    }
+
 
     return(
         <Grid>
@@ -44,7 +53,7 @@ const Panel = (props)=>{
             <Grid>
                 <EventosPanel></EventosPanel>
             </Grid>
-            <Modal open={notification} onClose={() => handleClose()}>
+            <Modal open={notification}>
                 <div>
                     {showNotification()}
                 </div>              

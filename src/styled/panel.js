@@ -44,10 +44,10 @@ export const TypographyDesconocidoResolucion = {
 }
 
 export const AlertaPaperStyle = {
-    padding:40,
-    width:"70%",
-    margin: 10,
-    height:"10vh"
+    margin:10,
+    background: "#fff",
+    padding: 40,
+    
 }
 
 export const NotificationBox= {

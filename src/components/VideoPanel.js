@@ -1,7 +1,17 @@
-import { Box, Grid,Paper,Typography, Button } from "@mui/material"
+import { Box, Modal,Grid,Paper,Typography, Button } from "@mui/material"
 import {VideoStyle, AlertaPaperStyle} from "../styled/panel";
 import "../styled/panel.css"
+import { useState } from "react";
+import IntrusosNotification from "./IntrusoNotificacion";
 const VideoPanel  = (props)=>{
+    const [openModal,setOpenModal] = useState(false)
+
+    const handleOpenModal = ()=>{
+        setOpenModal(true)
+    }
+    const handleCloseModal = () =>{
+        setOpenModal(false)
+    }
     return(
         <Grid item xs={8}>
             <Paper style={VideoStyle}>
@@ -23,11 +33,11 @@ const VideoPanel  = (props)=>{
                         </Grid>
                         <Grid item xs={12} md={6} align="center">
                             <Paper style={AlertaPaperStyle} align="center" fullWidth>
-                                <Typography><strong>Última Alerta</strong></Typography>
-                                <Typography><strong>Cámara 5</strong></Typography>
+                                <Typography fontSize={18} color={"red"}><strong>Última Alerta</strong></Typography>
+                                <Typography fontSize= {18} color={"red"}><strong>Cámara 5</strong></Typography>
                             </Paper>
                             <Grid>
-                                <Button style={{background:"rgba(82, 172, 70, 0.76)",color:"#fff"}}>Ver imagen</Button>
+                                <Button style={{background:"rgba(82, 172, 70, 0.76)",color:"#fff"}} onClick={handleOpenModal}>Ver imagen</Button>
                             </Grid>
                             
                         </Grid>
@@ -35,6 +45,9 @@ const VideoPanel  = (props)=>{
                     </Grid>
                 </Box>
             </Paper>
+            <Modal open={openModal}>
+                <IntrusosNotification isOpen={openModal} onClose={handleCloseModal}/>
+            </Modal>
         </Grid>
     )
 }

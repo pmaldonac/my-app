@@ -1,5 +1,5 @@
 import { AppBar, Toolbar, Box } from "@mui/material"
-
+import jacsecImage from "../Assets/jacsec.svg"
 const Header = () =>{
     return(
         <AppBar sx ={{background:"#ffff"}}>
@@ -7,12 +7,12 @@ const Header = () =>{
             <Box
             component="img"
             sx={{
-                height: 50,
-                width: 85,
+                height: 70,
+                width: 80,
                 maxHeight: { xs: 230, md: 160 },
                 maxWidth: { xs: 350, md: 250 },
             }}
-            src="https://i.ibb.co/T2gckt6/jacsec.png"
+            src={jacsecImage}
             />
             </Toolbar>
         </AppBar>

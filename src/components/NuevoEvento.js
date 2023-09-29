@@ -1,12 +1,13 @@
-import { Grid,Typography, Box, Button, FormControl, FormLabel, Radio,RadioGroup, FormControlLabel, TextField } from "@mui/material"
+import { IconButton, Grid,Typography, Box, Button, FormControl, FormLabel, Radio,RadioGroup, FormControlLabel, TextField } from "@mui/material"
 import { NotificationBox } from "../styled/panel"
 import { useState } from "react"
 import "../styled/notification.css"
-import LoginInput from "./loginInput"
+import CloseIcon from '@mui/icons-material/Close';
+
 const NuevoEvento = (props) =>{
     const [showTextbox, setShowTextbox] = useState(true);
     const [showTextbox2, setShowTextbox2] = useState(false);
-  
+    
     const handleRadioChange = () => {
         setShowTextbox2(false)
         setShowTextbox(true);
@@ -18,6 +19,10 @@ const NuevoEvento = (props) =>{
 
     return(
         <Box align="center" sx={NotificationBox}>
+                <Grid>
+                <IconButton style={{marginLeft:"95%"}} onClick={props.onClose}>
+                    <CloseIcon />
+                </IconButton></Grid>
                 <Typography align="center" fontSize={25}><strong>Ingresar Nuevo Evento</strong></Typography>
                 <Grid align = "center" style={{margin:25}}>
                 <FormControl>
@@ -48,7 +53,7 @@ const NuevoEvento = (props) =>{
                     </RadioGroup>
                 </FormControl>
                 </Grid>
-                <Grid style={{margin:10}}><Button className="buttonIntrusoObservacion">Guardar</Button></Grid>
+                <Grid style={{margin:10}}><Button className="buttonIntrusoObservacion" onClick={props.onClose}>Guardar</Button></Grid>
                 
         </Box>
         )

@@ -1,6 +1,8 @@
-import { Grid,Paper, Typography, Table,TableBody,TableCell, TableHead, TableRow, TableContainer, Button, Box } from "@mui/material"
+import { Grid,Paper, Modal,Typography, Table,TableBody,TableCell, TableHead, TableRow, TableContainer, Button, Box } from "@mui/material"
 import { EventosPaper, EventosTablaHeader } from "../styled/panel";
 import "../styled/panel.css"
+import { useState } from "react";
+import NuevoEvento from "./NuevoEvento";
 
 function createData(name, calories) {
     return { name, calories};
@@ -15,7 +17,17 @@ function createData(name, calories) {
   ];
 
 
+
 const EventosPanel  = (props)=>{
+    const [nuevoEventoModal, setNuevoEventoModal] = useState(false)
+
+    const handleOpenModal =  () => {
+        setNuevoEventoModal(true)
+    }
+    const handleClose =() =>{
+        setNuevoEventoModal(false)
+    }
+
     return(
         <Grid item xs={8}>
             <Paper style={EventosPaper}>
@@ -66,20 +78,20 @@ const EventosPanel  = (props)=>{
                             
                         </Grid>
                         <Grid item xs={6} md={2} align={"center"} sx={{marginTop: "0.5%"}}>
-                           <Button className="buttonEvento" fullWidth>Nuevo Evento</Button>
+                           <Button className="buttonEvento" onClick={handleOpenModal} fullWidth>Nuevo Evento</Button>
                         </Grid>
                         
                     </Grid>
                 </Box>
-                    
-
- 
-                
-                
-                
-
             </Paper>
+            <Modal open={nuevoEventoModal} onClose={handleClose}>
+                <div>
+                    <NuevoEvento onClose={handleClose}></NuevoEvento>
+                </div>              
+            </Modal>
         </Grid>
+         
+        
     )
 }
 

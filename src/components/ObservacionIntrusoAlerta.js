@@ -3,6 +3,10 @@ import { Grid,Typography, Box, Button, FormControl, RadioGroup, FormControlLabel
 import "../styled/notification.css"
 
 const IntrusosObservacionNotification = (props) =>{
+
+    if(!props.isOpen){ 
+        return null
+    };
     return( 
         <Box  sx={NotificationIntrusoBox}>
             <Typography align="center" fontSize={40} color={"red"}><strong>Alerta de Intruso</strong></Typography>
@@ -27,7 +31,7 @@ const IntrusosObservacionNotification = (props) =>{
 
             </Grid>
             <Grid align="center">
-            <Button style={{margin:100}} className="buttonIntrusoObservacion">Guardar</Button>
+            <Button style={{margin:100}} className="buttonIntrusoObservacion" onClick={props.onClose}>Guardar</Button>
             </Grid>
             
             

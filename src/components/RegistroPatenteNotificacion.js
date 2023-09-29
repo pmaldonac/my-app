@@ -4,9 +4,12 @@ import "../styled/notification.css"
 import LoginInput from "./loginInput"
 
 const RegistroPatenteNotification = (props) =>{
+    if(!props.isOpen){ 
+        return null
+    };
     return(
         <Box align="center" sx={NotificationBox}>
-           <Typography  align="center" fontSize={25} ><strong>Registro de Nueva Visita</strong></Typography>
+            <Typography  align="center" fontSize={25} ><strong>Registro de Nueva Visita</strong></Typography>
                 
                 <Grid style={{margin:45}}>
                 <Grid style={{margin:15}}><TextField label="Nombre del Conductor" variant="outlined" />
@@ -18,9 +21,10 @@ const RegistroPatenteNotification = (props) =>{
                             <Grid style={{margin:15}}><TextField label="Numero de casa" variant="outlined" />
                             </Grid>
                 </Grid>
-                <Grid style={{margin:10}}><Button className="buttonRegistrarPatente">Guardar</Button></Grid>
+                <Grid style={{margin:10}}><Button className="buttonRegistrarPatente" onClick={props.onClose}>Guardar</Button></Grid>
         </Box>
         )
+        
 }
 
 export default RegistroPatenteNotification

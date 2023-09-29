@@ -3,6 +3,9 @@ import { Grid,Typography, Box, Button } from "@mui/material"
 import "../styled/notification.css"
 
 const IntrusosCamara= (props) =>{
+    if(!props.isOpen){ 
+        return null
+    };
     return( 
         <Box align="center" sx={NotificationIntrusoBox}>
             <Typography align="center" fontSize={40} color={"red"}><strong>Alerta de Intruso</strong></Typography>
@@ -20,7 +23,7 @@ const IntrusosCamara= (props) =>{
                             src="https://s3.us-east-2.amazonaws.com/img2.eltipografo.cl/media/2019/12/3992757_n_vir3-750x438.jpg"
                             fullWidth/>
             </Grid>
-            <Grid><Button className="buttonIntrusoObservacion">Volver</Button></Grid>
+            <Grid><Button className="buttonIntrusoObservacion" onClick={props.onClose}>Volver</Button></Grid>
          
         </Box>
 
