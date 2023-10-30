@@ -1,16 +1,20 @@
 import { NotificationIntrusoBox } from "../styled/panel"
 import { Grid,Typography, Box, Button, FormControl, RadioGroup, FormControlLabel, Radio, FormLabel,TextField } from "@mui/material"
 import "../styled/notification.css"
+import axios from "axios"
+
+
 
 const IntrusosObservacionNotification = (props) =>{
 
     if(!props.isOpen){ 
         return null
     };
+
     return( 
         <Box  sx={NotificationIntrusoBox}>
             <Typography align="center" fontSize={40} color={"red"}><strong>Alerta de Intruso</strong></Typography>
-            <Typography align="center"fontSize={35} color={"red"} ><strong>Cámara 5</strong></Typography>
+            <Typography align="center"fontSize={35} color={"red"} ><strong>Cámara {props.data.camara}</strong></Typography>
             <Grid sx={{marginLeft:10}}>
                 <FormControl>
                     <FormLabel id="demo-radio-buttons-group-label" style={{color:"black", fontSize:18}}><strong>Gravedad de Alerta</strong></FormLabel>

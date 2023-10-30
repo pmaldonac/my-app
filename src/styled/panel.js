@@ -20,7 +20,8 @@ export const EventosPaper = {
     marginLeft:30,
     marginTop:20,
     width:1375,
-    background: "rgba(255, 188, 17,0.18)"
+    background: "rgba(255, 188, 17,0.18)",
+    
 }
 
 export const EventosTablaHeader = {

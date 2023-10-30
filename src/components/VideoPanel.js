@@ -1,11 +1,34 @@
 import { Box, Modal,Grid,Paper,Typography, Button } from "@mui/material"
 import {VideoStyle, AlertaPaperStyle} from "../styled/panel";
 import "../styled/panel.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IntrusosNotification from "./IntrusoNotificacion";
+import axios from "axios"
+
+
 const VideoPanel  = (props)=>{
     const [openModal,setOpenModal] = useState(false)
+    const [result, setResult] = useState({})
+    const [uploaded, setUploaded] = useState(false)
 
+    useEffect(()=>{
+        const fetchData = async () => {
+            try{
+                const response = await axios.get("http://localhost:9090/intruso/lastNotification")
+                if(response.data){
+                    setResult(response.data)
+                    setUploaded(true)
+                }
+                
+            }catch(e){
+                console.error(e)
+            }
+        }
+        if (!uploaded) {
+            fetchData(); 
+        }
+    },[uploaded,result])
+    
     const handleOpenModal = ()=>{
         setOpenModal(true)
     }
@@ -34,7 +57,7 @@ const VideoPanel  = (props)=>{
                         <Grid item xs={12} md={6} align="center">
                             <Paper style={AlertaPaperStyle} align="center" fullWidth>
                                 <Typography fontSize={18} color={"red"}><strong>Última Alerta</strong></Typography>
-                                <Typography fontSize= {18} color={"red"}><strong>Cámara 5</strong></Typography>
+                                <Typography fontSize= {18} color={"red"}><strong>Cámara {result.camera}</strong></Typography>
                             </Paper>
                             <Grid>
                                 <Button style={{background:"rgba(82, 172, 70, 0.76)",color:"#fff"}} onClick={handleOpenModal}>Ver imagen</Button>
@@ -46,7 +69,7 @@ const VideoPanel  = (props)=>{
                 </Box>
             </Paper>
             <Modal open={openModal}>
-                <IntrusosNotification isOpen={openModal} onClose={handleCloseModal}/>
+                <IntrusosNotification data={result} isOpen={openModal} onClose={handleCloseModal}/>
             </Modal>
         </Grid>
     )
