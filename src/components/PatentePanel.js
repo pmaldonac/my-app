@@ -1,8 +1,33 @@
 import { Grid,Paper, Typography } from "@mui/material"
 import { PatentePaper, CampoPaper, TypographyResolucion, TypographyDesconocidoResolucion } from "../styled/panel";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios"
+
 const PatentePanel  = (props)=>{
     const [notification, setNotification] = useState("Desconocido");
+    const [result, setResult] = useState({})
+    const [uploaded, setUploaded] = useState(false)
+
+    useEffect(()=>{
+        const fetchData = async () => {
+            try{
+                const response = await axios.get("http://localhost:9090/last-plate-notification")
+                if(response.data){
+                    setResult(response.data)
+                    setUploaded(true)
+                    setNotification(response.data.resolution)
+                }
+                
+            }catch(e){
+                console.error(e)
+            }
+        }
+
+        if(!uploaded){
+            fetchData()
+        }
+
+    },[result, uploaded])
 
     const selectNotificacion = () => {
         switch(notification){
@@ -23,7 +48,7 @@ const PatentePanel  = (props)=>{
                 <Grid>
                     <Paper style={CampoPaper}>
                         <Typography fontSize= {18}><strong>Último Acceso</strong></Typography>
-                        <Typography fontSize= {18}><strong>FTFD-17</strong></Typography>
+                        <Typography fontSize= {18}><strong>{result.license_plate}</strong></Typography>
                     </Paper>
                 </Grid>
                 <Grid>

@@ -14,7 +14,7 @@ const VideoPanel  = (props)=>{
     useEffect(()=>{
         const fetchData = async () => {
             try{
-                const response = await axios.get("http://localhost:9090/intruso/lastNotification")
+                const response = await axios.get("http://localhost:9090/last-video-notification")
                 if(response.data){
                     setResult(response.data)
                     setUploaded(true)
@@ -24,10 +24,13 @@ const VideoPanel  = (props)=>{
                 console.error(e)
             }
         }
-        if (!uploaded) {
-            fetchData(); 
+
+        if(!uploaded){
+            fetchData()
         }
-    },[uploaded,result])
+
+    },[result, uploaded])
+
     
     const handleOpenModal = ()=>{
         setOpenModal(true)

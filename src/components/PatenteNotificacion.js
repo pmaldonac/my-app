@@ -4,11 +4,25 @@ import "../styled/notification.css"
 import { useState } from "react"
 import RegistroPatenteNotification from "./RegistroPatenteNotificacion"
 import CloseIcon from '@mui/icons-material/Close';
+import axios from "axios"
 
 const PatenteNotification = (props) =>{
     const [modalRegisto, setModalRegistro] = useState(false)
 
+
+    const ResolutionUpdate = (resolutionField,plateField) =>{
+        axios.put(`http://localhost:9090/plate/notification/${props.data._id}/resolution`, {resolution:resolutionField, plate: plateField})
+        .then((response) => {
+            // Maneja la respuesta del servidor si es necesario
+            console.log(response.data);
+        })
+        .catch((error) => {
+            // Maneja errores de la solicitud si es necesario
+            console.error(error);
+        });
+    }
     const abrirModalRegistro = () =>{
+        ResolutionUpdate("Autorizado", props.data.license_plate)
         setModalRegistro(true)
     }
 
@@ -16,6 +30,12 @@ const PatenteNotification = (props) =>{
         setModalRegistro(false)
     }
 
+    const handleDesconocidoButton = () =>{
+        ResolutionUpdate("Desconocido", props.data.license_plate)
+        props.onClose()
+
+    }
+    if (!props.isOpen) return null;
     return(
         <div>
             <Box align="center" sx={NotificationBox}>
@@ -34,12 +54,12 @@ const PatenteNotification = (props) =>{
                                             maxHeight: { xs: 3000, md: 2000 },
                                             maxWidth: { xs: 2000, md: 3000 },
                                         }}
-                                        src="https://www.gateguard.com.mx/wp-content/uploads/2020/09/ACCESO-DE-RESIDENTES-CONTROL-DE-ACCESO-VEHICULAR-GATEGUARD-SYSTEM-1.jpg"
+                                        src={props.data.image_url}
                                         />
                             </Grid>
                             <Grid style={{margin:10}}><Button className="buttonRegistrarPatente" onClick={abrirModalRegistro}>Registrar Entrada</Button></Grid>
                             <Grid>
-                                <Button className="buttonRegistrarPatenteDesconocida" onClick={props.onClose}>Registrar como vehículo Desconocido</Button>
+                                <Button className="buttonRegistrarPatenteDesconocida" onClick={handleDesconocidoButton}>Registrar como vehículo Desconocido</Button>
                             </Grid>
                     </Box>
             <RegistroPatenteNotification isOpen={modalRegisto} onClose={cerrarModalRegistro}/>

@@ -15,6 +15,8 @@ function obtenerFechaActual() {
     return fechaFormateada;
   }
 
+
+
 const EventosPanel = (props) => {
     const [nuevoEventoModal, setNuevoEventoModal] = useState(false);
     const [events, setEvents] = useState([])
@@ -23,9 +25,9 @@ const EventosPanel = (props) => {
     useEffect( () =>{
       const FetchData =  async () =>{
           try{
-            const response = await axios.get("http://localhost:9090/all")
+            const response = await axios.get(`http://localhost:9090/notifications/2?date=${date}`)
             if(response.data){
-              setEvents([response.data])
+              setEvents(response.data)
 
             }
           }catch(e){
@@ -42,7 +44,7 @@ const EventosPanel = (props) => {
     const handleClose = () => {
       setNuevoEventoModal(false);
     };
-  
+    
     return (
       <Grid item xs={8}>
         <Paper style={EventosPaper}>
@@ -69,10 +71,10 @@ const EventosPanel = (props) => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {events[0].map((event) => (
-                          <TableRow  style={{ top: 57, minWidth:17 }} align="Right" key={event.hora}>
-                            <TableCell   component="th"  align="Right">{event.hora}</TableCell>
-                            <TableCell align="Right">{event.descripcion}</TableCell>
+                        {events.map((event, index) => (
+                          <TableRow key={index}>
+                            <TableCell  style={{ top: 57, minWidth:17 }} align="Right">{event.hora}</TableCell>
+                            <TableCell style={{ top: 57, minWidth:17 }} align="Right">{event.descripcion}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
